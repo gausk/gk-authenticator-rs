@@ -20,10 +20,10 @@ pub enum Command {
             value_parser(is_base32_key)
         )]
         key: String,
-        #[arg(long, help = "Time based account", conflicts_with = "htop")]
+        #[arg(long, help = "Time based account (default)", conflicts_with = "hotp")]
         totp: bool,
         #[arg(long, help = "Counter based account", conflicts_with = "totp")]
-        htop: bool,
+        hotp: bool,
         #[arg(
             short,
             long,
@@ -49,7 +49,7 @@ pub enum Command {
         account: String,
         #[arg(short, long, help = "Length of the OTP", default_value_t = 6)]
         length: u64,
-    }
+    },
 }
 
 #[derive(Copy, Clone, Debug, ValueEnum)]
