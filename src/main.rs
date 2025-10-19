@@ -1,12 +1,13 @@
 #![allow(unused)]
 mod command;
 
+use anyhow::Result;
 use clap::Parser;
 use command::Arg;
 use crate::command::Command;
 
-fn main() {
-    let arg = Arg::parse();
+fn main() -> Result<()> {
+    let arg = Arg::try_parse()?;
     match arg.command {
         Command::Add { account, key, htop, totp, algorithm } => {
 
@@ -21,4 +22,5 @@ fn main() {
 
         }
     }
+    Ok(())
 }
