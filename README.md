@@ -98,3 +98,13 @@ gk-authenticator --help
 # Help for specific command
 gk-authenticator add --help
 ```
+
+### Data Storage
+
+`gk-authenticator` stores all account data locally on your system in a JSON file:
+
+- **Location:** `~/.gk-authenticator/account.json`
+- **Permissions:** The file is created with restricted permissions (600) for security
+- **Persistence:** All accounts and their settings are automatically saved after each operation
+
+The data includes account names, secret keys, algorithm preferences, and HOTP counter values (if applicable). The application automatically creates the storage directory and file on first use.
