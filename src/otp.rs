@@ -141,3 +141,18 @@ impl Algorithm {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_hotp_default() {
+        let key = "4AZJFQFIGYM2KMTOO72I6FAOZ6ZFWJR6";
+        let hotp = Otp::new(key, Algorithm::Sha1, false, None, 6).unwrap();
+        assert_eq!(hotp.counter, 0);
+        let code = hotp.generate();
+        assert_eq!(code.len(), 6);
+        assert_eq!(code, "852241");
+    }
+}
