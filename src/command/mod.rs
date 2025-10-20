@@ -1,5 +1,11 @@
+pub mod add;
+pub mod delete;
+pub mod list;
+pub mod view;
+
 use clap::{Parser, Subcommand, ValueEnum};
 use data_encoding::BASE32_NOPAD;
+use serde::{Deserialize, Serialize};
 
 #[derive(Parser, Debug)]
 pub struct Arg {
@@ -41,18 +47,18 @@ pub enum Command {
     #[clap(about = "List OTP for all accounts")]
     List {
         #[arg(short, long, help = "Length of the OTP", default_value_t = 6)]
-        length: u64,
+        length: usize,
     },
     #[clap(about = "List OTP for a particular account")]
     View {
         #[arg(long, help = "Name of the account")]
         account: String,
         #[arg(short, long, help = "Length of the OTP", default_value_t = 6)]
-        length: u64,
+        length: usize,
     },
 }
 
-#[derive(Copy, Clone, Debug, ValueEnum)]
+#[derive(Copy, Clone, Debug, ValueEnum, Serialize, Deserialize)]
 pub enum Algorithm {
     Sha1,
     Sha256,
